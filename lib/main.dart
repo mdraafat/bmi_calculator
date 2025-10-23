@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
 class MainApp extends StatefulWidget {
-  const MainApp({super.key});
+  final String username;
+
+  const MainApp({super.key, required this.username});
 
   @override
   State<MainApp> createState() => _MainAppState();
@@ -38,11 +36,62 @@ class _MainAppState extends State<MainApp> {
     }
   }
 
+  void _showProfileDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Row(
+            children: [
+              const Icon(Icons.person, size: 40),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  widget.username,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.close),
+              label: const Text('Cancel'),
+            ),
+            SizedBox(width: 10),
+            OutlinedButton.icon(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/');
+              },
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text("BMI Calculator")),
+        appBar: AppBar(
+          title: const Text("BMI Calculator"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.account_circle),
+              iconSize: 32,
+              onPressed: _showProfileDialog,
+              tooltip: 'Profile',
+            ),
+          ],
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
