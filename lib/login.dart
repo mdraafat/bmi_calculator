@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import './main.dart';
 
-void main() {
-  runApp(const LoginWidget());
-}
-
 class LoginWidget extends StatelessWidget {
   const LoginWidget({super.key});
 

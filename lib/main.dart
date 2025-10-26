@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import './login.dart';
+
+void main() {
+  runApp(const LoginWidget());
+}
 
 class MainApp extends StatefulWidget {
   final String username;
